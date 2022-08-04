@@ -3,16 +3,6 @@ from bs4 import BeautifulSoup
 import io
 
 url = "http://allrecipes.com/search/results/?search="
-def getContent():
-    with open("search.html") as f:
-        result = f.read()
-    return result
-
-def getRecipe():
-    with open("recipe.html") as f:
-        result = f.read()
-    return result
-
 
 def searchRecipe(query: str) -> str:
     query = query.replace(' ','%20')
@@ -20,7 +10,7 @@ def searchRecipe(query: str) -> str:
     searchItems = searchContent.find_all(attrs={'role':'listitem'})
     link = searchItems[0].find('a')['href']
     return link
-#requests.get(url).content
+
 def readRecipe(url: str) -> str:
     soup = BeautifulSoup(requests.get(url).content,"html.parser")
     name = soup.find('h1',class_="headline").text
