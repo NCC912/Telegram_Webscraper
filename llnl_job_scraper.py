@@ -8,6 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+
 url = "https://www.llnl.gov/join-our-team/careers/find-your-job"
 
 def getLLNLJob(skillset: list) -> Optional[list]:
