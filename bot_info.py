@@ -20,6 +20,7 @@ from telegram.ext import ConversationHandler
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from yelp import search_yelp, find_hours
 import logging
+import os
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -76,7 +77,7 @@ def cancel(update: Update, context: CallbackContext):
 def main() -> None:
     """Run bot."""
     # Create the Updater and pass it your bot's token.
-    updater = Updater("API Token would go here")
+    updater = Updater(os.getenv("TELEGRAM_TOKEN"))
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

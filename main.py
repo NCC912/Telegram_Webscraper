@@ -18,6 +18,7 @@ import finishline
 import translator
 import movie_quote
 import ebay
+import llnl_jobs
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -33,6 +34,7 @@ storage = []
 def search(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
     reply_keyboard = [['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']]
+    find = ""
     try:
         find = context.args[0]
         city = context.args[1]
@@ -43,6 +45,7 @@ def search(update: Update, context: CallbackContext):
             zip = None
     except (IndexError, ValueError):
         update.message.reply_text('Syntaxt Error. Usage: /search <text to search> <city> <state> <Optional: zip>')
+        return
     options = search_yelp(find, city, state, zip)
     stores = options[0]
     storage.append(stores)
@@ -76,7 +79,18 @@ def start(update: Update, context: CallbackContext) -> None:
 
 def help_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    update.message.reply_text(
+        'Commands:'
+        '/yelp <Store> <City> <State> [zip]: Returns hours for the store'
+        '/movie <name of movie>: returns IMDB info for movie'
+        '/recipe <recipe name>: Returns recipe'
+        '/shoes: Returns cost for Nike Airforce 1s'
+        '/translate <phrase>: Translates phrase into english'
+        '/quote: Returns a random movie quote'
+        '/ebay <search terms>: Returns prices for that item on ebay'
+
+        '/jobs <skillset terms>: Lists jobs from LLNL Matching skillset terms'
+                              )
 
 def movie(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
@@ -126,6 +140,12 @@ def searchEbay(update: Update, context: CallbackContext) -> None:
         result
     )
 
+def jobs(update: Update, context: CallbackContext) -> None:
+    result = llnl_jobs.getLLNLJob(
+    update.message.reply_text(context.args)
+        result
+    )
+
 def main() -> None:
     """Start the bot."""
     updater = Updater(os.getenv("TELEGRAM_TOKEN"))
@@ -148,10 +168,10 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("movie", movie))
     dispatcher.add_handler(CommandHandler("recipe", recipe))
     dispatcher.add_handler(CommandHandler("shoes", shoes))
-    dispatcher.add_handler(CommandHandler("yelp", yelp))
     dispatcher.add_handler(CommandHandler("translate", translate))
     dispatcher.add_handler(CommandHandler("quote", quote))
     dispatcher.add_handler(CommandHandler("ebay", searchEbay))
+    dispatcher.add_handler(CommandHandler("jobs", jobs))
 
     updater.start_polling()
 
