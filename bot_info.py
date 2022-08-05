@@ -59,8 +59,7 @@ def search(update: Update, context: CallbackContext):
     update.message.reply_text("Here are the top 10 Yelp results for your search. Type the number corresponding to the business you want to see the hours of",
     reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return STORE
-    
-    
+
 
 def store(update: Update, context: CallbackContext):
     user = update.message.from_user
