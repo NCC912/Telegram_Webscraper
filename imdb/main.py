@@ -17,7 +17,6 @@ import logging
 
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-import recipes
 import imdb
 
 # Enable logging
@@ -46,12 +45,6 @@ def link(update: Update, context: CallbackContext) -> None:
         reply_markup=ForceReply(selective=True),
     )
 
-def recipe(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /start is issued."""
-    result = recipes.recipe(" ".join(context.args))
-    update.message.reply_text(
-        result
-    )
 
 def help_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
@@ -81,7 +74,6 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
     dispatcher.add_handler(CommandHandler("link", link))
-    dispatcher.add_handler(CommandHandler("recipe", recipe))
     dispatcher.add_handler(CommandHandler("movie", movie))
 
     # on non command i.e message - echo the message on Telegram
