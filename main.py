@@ -17,6 +17,7 @@ import recipes
 import finishline
 import translator
 import movie_quote
+import ebay
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -119,6 +120,12 @@ def quote(update: Update, context: CallbackContext) -> None:
         result
     )
 
+def searchEbay(update: Update, context: CallbackContext) -> None:
+    result = ebay.priceList(" ".join(context.args))
+    update.message.reply_text(
+        result
+    )
+
 def main() -> None:
     """Start the bot."""
     updater = Updater(os.getenv("TELEGRAM_TOKEN"))
@@ -144,6 +151,7 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("yelp", yelp))
     dispatcher.add_handler(CommandHandler("translate", translate))
     dispatcher.add_handler(CommandHandler("quote", quote))
+    dispatcher.add_handler(CommandHandler("ebay", searchEbay))
 
     updater.start_polling()
 
