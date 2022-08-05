@@ -53,7 +53,7 @@ def search(update: Update, context: CallbackContext):
     for i in range(0, len(stores)):
         update.message.reply_text("[%d] %s" % (i+1, stores[i]))
     update.message.reply_text("Here are the top 10 Yelp results for your search. Type the number corresponding to the business you want to see the hours of",
-    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return STORE
 
 def store(update: Update, context: CallbackContext):
@@ -90,7 +90,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
         '/ebay <search terms>: Returns prices for that item on ebay'
 
         '/jobs <skillset terms>: Lists jobs from LLNL Matching skillset terms'
-                              )
+    )
 
 def movie(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
@@ -142,7 +142,7 @@ def searchEbay(update: Update, context: CallbackContext) -> None:
 
 def jobs(update: Update, context: CallbackContext) -> None:
     result = llnl_jobs.getLLNLJob(
-    update.message.reply_text(context.args)
+        update.message.reply_text(context.args)
         result
     )
 
