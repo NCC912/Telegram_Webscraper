@@ -65,7 +65,7 @@ def translate(update: Update, context: CallbackContext) -> None:
         result
     )
 
-def translate(update: Update, context: CallbackContext) -> None:
+def quote(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     result = movie_quote.moviequote()
     update.message.reply_text(
