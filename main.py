@@ -58,7 +58,7 @@ def echo(update: Update, context: CallbackContext) -> None:
 def main() -> None:
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
-    updater = Updater(os.getenv("TELEGRAM_TOKEN"))
+    updater = Updater(os.getenv("5569737914:AAEsJWDOBn-pxOkxnr4f4a-hx9XovyIOJ58"))
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

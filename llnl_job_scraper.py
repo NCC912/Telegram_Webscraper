@@ -1,8 +1,3 @@
-# Goal: Fetch URLS for job postings based on user's 
-#1. Get 
-
-# Return list
-from pprint import PrettyPrinter
 from typing import Optional
 import requests
 from bs4 import BeautifulSoup
